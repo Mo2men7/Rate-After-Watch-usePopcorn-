@@ -66,18 +66,11 @@ body {
   margin: 4.8rem;
 } */
 
-.loaderContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .loader {
   width: 5.4em;
   height: 5.4em;
   border: 0.4em solid rgb(84, 84, 84);
-  border-left-color: #a23ffc;
+  border-left-color: var(--color-primary-light);
   border-radius: 45%;
   animation: spin 0.7s linear infinite;
 }
