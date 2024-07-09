@@ -58,12 +58,34 @@ body {
   position: relative;
 }
 
-.loader {
+/* .loader {
   text-align: center;
   text-transform: uppercase;
   font-size: 2rem;
   font-weight: 600;
   margin: 4.8rem;
+} */
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  width: 5.4em;
+  height: 5.4em;
+  border: 0.4em solid rgb(84, 84, 84);
+  border-left-color: #a23ffc;
+  border-radius: 45%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .error {
