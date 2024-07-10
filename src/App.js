@@ -109,7 +109,7 @@ export default function App() {
     <>
       <NavBar>
         <Search query={query} setQuery={setQuery} />
-        <NumResults movies={movies} />
+        <NumResults movies={movies} query={query} />
       </NavBar>
 
       <Main>
@@ -196,11 +196,17 @@ function Logo() {
     </div>
   );
 }
-function NumResults({ movies }) {
+function NumResults({ movies, query }) {
   return (
-    <p className="num-results">
-      Found <strong>{movies.length}</strong> results
-    </p>
+    <>
+      {query ? (
+        <p className="num-results">
+          Found <strong>{movies.length}</strong> results
+        </p>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
@@ -287,6 +293,10 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
     function () {
       if (!title) return;
       document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = "Rate After Watch";
+      };
     },
     [title]
   );
