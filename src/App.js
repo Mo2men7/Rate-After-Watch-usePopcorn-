@@ -53,7 +53,7 @@ const average = (arr) =>
 const KEY = `6f873865`;
 
 export default function App() {
-  const [query, setQuery] = useState("ahmed");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +97,7 @@ export default function App() {
           }
         } finally {
           setIsLoading(false);
-          setError("");
+          // setError("");
         }
       }
       if (query.length < 3) {
@@ -106,6 +106,7 @@ export default function App() {
         return;
       }
 
+      handleCloseMovie();
       fetchMovies();
 
       return function () {
@@ -123,16 +124,6 @@ export default function App() {
       </NavBar>
 
       <Main>
-        {/* <Box element={<MovieList movies={movies} />} />
-        <Box
-          element={
-            <>
-              <WatchedSummary watched={watched} />
-              <WatchedMoviesList watched={watched} />
-            </>
-          }
-        /> */}
-        {/* <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box> */}
         <Box>
           {isLoading && <Loader />}
           {!isLoading && !error && (
@@ -283,6 +274,7 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
     Director: director,
     Genre: genre,
   } = movie;
+
   useEffect(
     function () {
       async function fetchMovieDetails() {
@@ -324,6 +316,21 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newMovie);
     onCloseMovie();
   }
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+        }
+      }
+      document.addEventListener("keydown", callback);
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onCloseMovie]
+  );
 
   return (
     <div className="details">
