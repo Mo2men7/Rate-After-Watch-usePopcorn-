@@ -283,6 +283,14 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
     [selectedID]
   );
 
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+    },
+    [title]
+  );
+
   function newWatched() {
     const newMovie = {
       imdbID: selectedID,
@@ -337,7 +345,7 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
                   )}
                 </>
               ) : (
-                <p>Ypu rated this movie with {watchedUserRating} ⭐</p>
+                <p>You rated this movie with {watchedUserRating} ⭐</p>
               )}
             </div>
             <p>
