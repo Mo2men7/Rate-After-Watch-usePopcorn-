@@ -1,0 +1,33 @@
+- Splitting app into components
+
+- Prop Drilling : pass some props through several nested child components to get that data into some deeply nested component
+
+- Component Composition : combining different components using the children prop
+
+- Using Elements As Props (Another way like children props)
+
+- Prop Types
+
+// section 11 was considered as advanced and it was intense and shows how things work inside react //
+
+- Importance of the key prop (and fixing eat-n-split app) : special prop what we tell thiffing algorithm that an element unique
+
+- Pure an impure functions (side effect and interacting with outside world)
+
+- State Update Batching
+
+- How Events Work in React
+
+- Library vs. Frameworks
+
+- useEffect hook and dependency array
+
+- Handling errors that can happen after fetch
+
+- cleanup function of useEffect : we can return from effect (optional), runs before the effect is executed again and after a component has unmounted
+
+- cleaning up data fetching : so we create a request just to search for example for the desired word (using AbortController)
+
+- What the React hook actually is and how is it work ?
+
+- 
