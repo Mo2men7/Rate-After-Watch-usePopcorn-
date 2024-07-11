@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 import { useMovies } from "./useMovies";
 import { useLocalStorageState } from "./useLocalStorageState";
+import { useKeyCode } from "./useKeyCode";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -97,25 +98,12 @@ function NavBar({ children }) {
   );
 }
 function Search({ query, setQuery }) {
-  // useEffect(function () {
-  //   const el = document.querySelector(".search");
-  //   el.focus();
-  // }, []);
-
   const inputElement = useRef(null); //we set the initial value as null for DOM elements
-  useEffect(function () {
-    function callback(e) {
-      if (document.activeElement === inputElement.current) return;
-      //activeElement is the element that is focused
-      if (e.code === "Enter") {
-        inputElement.current.focus();
-        setQuery("");
-      }
-    }
-    document.addEventListener("keydown", callback);
-    return () => document.removeEventListener("keydown", callback);
-    // inputElement.current.style.background = "red";
-  }, []);
+  useKeyCode("Enter", function () {
+    if (document.activeElement === inputElement.current) return;
+    inputElement.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
@@ -269,20 +257,7 @@ function MovieDetails({ selectedID, onCloseMovie, onAddWatched, watched }) {
     onCloseMovie();
   }
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-      document.addEventListener("keydown", callback);
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
-  );
+  useKeyCode("Escape", onCloseMovie);
 
   return (
     <div className="details">
